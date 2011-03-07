@@ -341,8 +341,9 @@ class PyTyrant(object, UserDict.DictMixin):
 
 class Tyrant(object):
     @classmethod
-    def open(cls, host='127.0.0.1', port=DEFAULT_PORT):
+    def open(cls, host='127.0.0.1', port=DEFAULT_PORT, timeout=3.0):
         sock = socket.socket()
+        sock.settimeout(timeout)
         sock.connect((host, port))
         sock.setsockopt(socket.SOL_TCP, socket.TCP_NODELAY, 1)
         return cls(sock)
